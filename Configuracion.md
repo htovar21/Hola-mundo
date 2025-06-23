@@ -22,7 +22,7 @@ cp config.env.example config.env
 
 ```env
 # Reemplazar con su URI de MongoDB Atlas
-MONGODB_URI=mongodb+srv://su_usuario:su_contraseña@su_cluster.mongodb.net/su_base_de_datos?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://tovarfigueroa:1234@cluster0.tfq0c23.mongodb.net/Web_personal?retryWrites=true&w=majority&appName=Cluster0
 PORT=3000
 ```
 

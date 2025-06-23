@@ -32,9 +32,9 @@ Un portfolio web personal moderno y responsivo con integración de MongoDB Atlas
 cp config.env.example config.env
 ```
 
-**2. Edita `config.env` con tu URI de MongoDB Atlas:**
+**2. Edita `config.env` con tu URI de MongoDB Atlas:** (Ya está colocada la uri pero si debe editar config.env)
 ```env
-MONGODB_URI=mongodb+srv://<tu_usuario>:<tu_contraseña>@<tu_cluster>.mongodb.net/<tu_base_de_datos>?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://tovarfigueroa:1234@cluster0.tfq0c23.mongodb.net/Web_personal?retryWrites=true&w=majority&appName=Cluster0
 PORT=3000
 ```
 
@@ -100,7 +100,7 @@ Landing-Page-Web-Personal/
 │   ├── index.html           # Página principal
 │   ├── styles.css           # Estilos CSS
 │   └── script.js            # JavaScript del frontend
-├── config.env               # ⚠️ CONFIGURA TU URI AQUÍ
+├── config.env               #  CONFIGURACION URI AQUÍ
 ├── config.env.example       # Ejemplo de configuración
 ├── DATABASE_CONFIG.md       # Guía detallada de configuración
 ├── server.js                # Servidor Express
