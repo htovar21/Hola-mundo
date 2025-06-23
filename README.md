@@ -1,86 +1,214 @@
+# Portfolio Personal - Héctor Tovar
 
-# Portafolio Web - Héctor Tovar
+Un portfolio web personal moderno y responsivo con integración de MongoDB Atlas para gestionar el contenido dinámicamente.
 
-¡Bienvenido/a al repositorio de mi portafolio personal como desarrollador web junior! Este proyecto es una landing page moderna, responsiva y accesible, diseñada para mostrar mis habilidades, proyectos y formas de contacto de manera profesional.
+## 🚀 Características
 
----
+- **Diseño Moderno**: Interfaz limpia y profesional con animaciones suaves
+- **Responsivo**: Optimizado para dispositivos móviles y desktop
+- **Base de Datos MongoDB Atlas**: Contenido dinámico gestionado desde la nube
+- **API REST**: Endpoints para obtener y enviar datos
+- **Formulario de Contacto**: Sistema de mensajes integrado con la base de datos
 
-## 🚀 Características principales
+## 🛠️ Tecnologías Utilizadas
 
-- **Diseño moderno y profesional**: Inspirado en tendencias actuales de UI/UX.
-- **Totalmente responsive**: Se adapta perfectamente a móviles, tablets y escritorio.
-- **Navegación fluida**: Menú superior con scroll suave y menú hamburguesa en mobile.
-- **Sección Hero**: Presentación destacada con foto, nombre y redes sociales.
-- **Sobre mí**: Breve descripción profesional y motivacional.
-- **Proyectos**: Tarjetas con imagen, descripción y botón "Ver más" enlazando a GitHub o demo.
-- **Tecnologías**: Lista de stacks y herramientas dominadas.
-- **Formulario de contacto**: Validación en frontend y feedback visual.
-- **Footer accesible**: Íconos sociales grandes y enlaces claros.
-- **Accesibilidad**: Contraste optimizado, navegación por teclado y etiquetas ARIA.
-- **Animaciones suaves**: Fade-in en secciones, efectos hover en botones y tarjetas.
+- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
+- **Backend**: Node.js, Express.js
+- **Base de Datos**: MongoDB Atlas con Mongoose
+- **Herramientas**: Nodemon para desarrollo
 
----
+## 📋 Requisitos Previos
 
-## 🛠️ Tecnologías utilizadas
+- Node.js (versión 14 o superior)
+- Cuenta en MongoDB Atlas (gratuita)
+- npm o yarn
 
-- **HTML5** (semántico y accesible)
-- **CSS3** (Flexbox, Grid, variables, transiciones, media queries)
-- **JavaScript** (ES6+, scroll suave, validación, IntersectionObserver)
-- **SVG** para íconos sociales
-- **NODE** 
-- **EXPRESS** 
+## 🔧 CONFIGURACIÓN RÁPIDA
 
----
+### ⚠️ **PASO OBLIGATORIO: Configurar MongoDB Atlas**
+
+**1. Copia el archivo de configuración:**
+```bash
+cp config.env.example config.env
+```
+
+**2. Edita `config.env` con tu URI de MongoDB Atlas:**
+```env
+MONGODB_URI=mongodb+srv://<tu_usuario>:<tu_contraseña>@<tu_cluster>.mongodb.net/<tu_base_de_datos>?retryWrites=true&w=majority
+PORT=3000
+```
+
+**3. Instala dependencias:**
+```bash
+npm install
+```
+
+**4. Prueba la conexión:**
+```bash
+npm run test:connection
+```
+
+**5. Pobla la base de datos:**
+```bash
+npm run seed
+```
+
+**6. Inicia el servidor:**
+```bash
+npm run dev
+```
+
+**7. Abre en tu navegador:**
+```
+http://localhost:3000
+```
+
+## 🔗 OBTENER URI DE MONGODB ATLAS
+
+### Paso 1: Crear cuenta
+- Ve a [MongoDB Atlas](https://www.mongodb.com/atlas)
+- Crea una cuenta gratuita
+
+### Paso 2: Crear cluster
+- Crea un nuevo cluster (gratuito)
+
+### Paso 3: Configurar acceso
+- En "Database Access", crea un usuario
+- En "Network Access", añade tu IP o `0.0.0.0/0`
+
+### Paso 4: Obtener URI
+- Haz clic en "Connect" en tu cluster
+- Selecciona "Connect your application"
+- Copia la URI y reemplaza `<password>` con tu contraseña
+
+## 📁 Estructura del Proyecto
+
+```
+Landing-Page-Web-Personal/
+├── config/
+│   └── database.js          # Configuración de MongoDB Atlas
+├── models/
+│   ├── Profile.js           # Modelo del perfil
+│   ├── Project.js           # Modelo de proyectos
+│   └── Contact.js           # Modelo de contactos
+├── routes/
+│   └── api.js               # Rutas de la API
+├── scripts/
+│   ├── seedData.js          # Script para poblar la BD
+│   └── testConnection.js    # Script para probar conexión
+├── public/
+│   ├── index.html           # Página principal
+│   ├── styles.css           # Estilos CSS
+│   └── script.js            # JavaScript del frontend
+├── config.env               # ⚠️ CONFIGURA TU URI AQUÍ
+├── config.env.example       # Ejemplo de configuración
+├── DATABASE_CONFIG.md       # Guía detallada de configuración
+├── server.js                # Servidor Express
+├── package.json
+└── README.md
+```
+
+## 🔌 API Endpoints
+
+### GET `/api/profile`
+Obtiene los datos del perfil del desarrollador.
+
+### GET `/api/projects`
+Obtiene todos los proyectos ordenados por el campo `order`.
+
+### POST `/api/contact`
+Envía un mensaje de contacto.
+```javascript
+{
+  "email": "usuario@ejemplo.com",
+  "message": "Mensaje de contacto"
+}
+```
+
+### GET `/api/contact`
+Obtiene todos los mensajes de contacto (para administración).
+
+## 📊 Estructura de la Base de Datos
+
+### Colección: Profile
+```javascript
+{
+  name: String,           // Nombre del desarrollador
+  title: String,          // Título profesional
+  description: String,    // Descripción del hero
+  about: String,          // Texto de la sección "Sobre mí"
+  socialLinks: {
+    twitter: String,      // URL de Twitter
+    github: String,       // URL de GitHub
+    linkedin: String      // URL de LinkedIn
+  },
+  technologies: [String], // Array de tecnologías
+  heroImage: String       // URL de la imagen del hero
+}
+```
+
+### Colección: Project
+```javascript
+{
+  title: String,          // Título del proyecto
+  description: String,    // Descripción del proyecto
+  image: String,          // URL de la imagen
+  githubUrl: String,      // URL del repositorio GitHub
+  liveUrl: String,        // URL del proyecto en vivo (opcional)
+  technologies: [String], // Tecnologías utilizadas
+  order: Number           // Orden de visualización
+}
+```
+
+### Colección: Contact
+```javascript
+{
+  email: String,          // Email del remitente
+  message: String,        // Mensaje
+  read: Boolean,          // Estado de lectura
+  createdAt: Date         // Fecha de creación
+}
+```
+
+## 🎨 Personalización
+
+### Modificar el Contenido
+
+1. **Editar datos del perfil**: Modifica el archivo `scripts/seedData.js` y ejecuta `npm run seed`
+2. **Agregar proyectos**: Añade nuevos objetos al array de proyectos en `seedData.js`
+3. **Cambiar estilos**: Edita `public/styles.css`
+4. **Modificar funcionalidad**: Edita `public/script.js`
+
+### Agregar Nuevas Secciones
+
+1. Crea el modelo correspondiente en `models/`
+2. Añade las rutas en `routes/api.js`
+3. Actualiza el frontend en `public/script.js`
+4. Añade los estilos en `public/styles.css`
 
 
-## 📱 Responsive Design
+## 📝 Comandos Útiles
 
-- El menú se convierte en hamburguesa en pantallas pequeñas.
-- Las secciones se apilan verticalmente en mobile.
-- Botones y campos de formulario son cómodos y legibles en cualquier dispositivo.
+```bash
+# Instalar dependencias
+npm install
 
----
+# Probar conexión a MongoDB Atlas
+npm run test:connection
 
-## ♿ Accesibilidad
+# Poblar la base de datos
+npm run seed
 
-- Contraste de texto optimizado (cumple WCAG 2.1 AA).
-- Navegación por teclado en todos los elementos interactivos.
-- Etiquetas ARIA en enlaces sociales y botones.
-- Feedback visual en el formulario.
+# Iniciar servidor de desarrollo
+npm run dev
 
----
+# Iniciar servidor de producción
+npm start
+```
 
-## ⚡ Animaciones y transiciones
 
-- Fade-in de secciones al hacer scroll (IntersectionObserver).
-- Efectos hover y focus en botones, tarjetas y enlaces sociales.
-- Scroll suave al navegar entre secciones.
+## 👨‍💻 Autor
 
----
-
-## 📝 Cómo ejecutar el proyecto
-
-1. **Descarga o clona este repositorio:**
-   
-   git clone https://github.com/htovar21/tu-portafolio.git
-   
-2. instalar las dependencias con npm install
-3. ejecutar el servidor con node server.js
-
----
-
-## 🌐 Despliegue
-
-Este proyecto está listo desplegado en Render 
-https://hola-mundo-sky5.onrender.com
-
----
-
-## 🙋‍♂️ Contacto y redes
-
-- **GitHub:** [htovar21](https://github.com/htovar21)
----
-
-## 🏷️ Licencia
-
-Este proyecto es de uso personal y educativo. Siéntete libre de adaptarlo y mejorarlo para tu propio portafolio. 
+**Héctor Tovar**
+- Twitter: [@HectorT33838505](https://x.com/HectorT33838505)
+- GitHub: [@htovar21](https://github.com/htovar21)
